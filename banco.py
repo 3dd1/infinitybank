@@ -16,7 +16,7 @@ def adicionarConta(cliente: str, saldo: float) -> None:
         "saldo": saldo
     }
     banco.append(conta)
-    print('Conta cadastra com sucesso!')
+    print(f'Conta cadastra com sucesso!\nNúmero da conta: {conta["conta"]}\nNome do cliente: {conta["cliente"]}')
 
 def obterConta(conta: int) ->Optional[dict or None]:
     for cliente in banco:
@@ -24,6 +24,12 @@ def obterConta(conta: int) ->Optional[dict or None]:
             return cliente
     return None
 
+def consultarConta(conta: int):
+    cliente = obterConta(conta)
+    if cliente:
+        print(f"Número da conta:{cliente['conta']}\nNome da conta:{cliente['cliente']}\nSaldo da conta: R${cliente['saldo']}")
+    else:
+        print("Cliente não encontrado")
 
 def deletarConta(conta: int) -> None:
     cliente = obterConta(conta)
@@ -45,9 +51,11 @@ def listarContas() -> None:
 
 def atualizarNome(conta: int, novo_nome: str) -> None:
     cliente = obterConta(conta)
+    print(f"Nome antigo: {cliente['cliente']}")
     if cliente:
         cliente['cliente'] = novo_nome
-        print('dados alterados com sucesso!')
+        print(f"Nome antigo: {novo_nome}")
+        print('Dados alterados com sucesso!')
     else:
         print('Cliente não encontrado!')
 
